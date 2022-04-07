@@ -28,6 +28,12 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          sudo apt list --installed 
+          sudo apt list --installed > packages.txt
           which clang
           ls -la $(which clang)
+          clang --version
+      - name: Store results
+        uses: actions/upload-artifact@v3
+        with:
+          name: ubuntu-packages
+          path: packages.txt
